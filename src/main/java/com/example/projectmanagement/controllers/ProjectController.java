@@ -37,14 +37,8 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public String saveProject(@ModelAttribute("project") Project project, @RequestParam List<Long> employees) {
+    public String saveProject(@ModelAttribute("project") Project project) {
         projectDao.save(project);
-
-        Iterable<Employee> chosenEmployees = employeeDao.findAllById(employees);
-        chosenEmployees.forEach(c -> c.setProject(project));
-        employeeDao.saveAll(chosenEmployees);
         return "redirect:/projects/";
     }
-
-
 }
