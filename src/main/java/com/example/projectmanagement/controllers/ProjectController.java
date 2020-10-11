@@ -25,6 +25,6 @@ public class ProjectController {
     public String saveProject(@ModelAttribute("project") Project project) {
         projectDao.save(project);
 
-        return "redirect:/projects/new";
+        return "redirect:/";
     }
 }
