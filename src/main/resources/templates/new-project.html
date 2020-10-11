@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>New project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <div th:if="${not #lists.isEmpty(projects)}">
+        <h3>Saved projects</h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Stage</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="proj : ${projects}">
+                    <th scope="row" th:text="${proj.getProjectId()}">1</th>
+                    <td th:text="${proj.getName()}">project 1</td>
+                    <td th:text="${proj.getStage()}">Not Started</td>
+                    <td th:text="${proj.getDescription()}">Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h1>Add new project</h1>
+        <form action="/projects/save" method="POST" th:object="${project}">
+
+            <div class="form-group mb-2">
+                <input type="text" th:field="*{name}" placeholder="Project Name">
+            </div>
+
+
+            <div>
+                <select th:field="*{stage}" class="form-control mb-2">
+                    <option th:value="NOTSTARTED"> Not Started</option>
+                    <option th:value="INPROGRESS"> In progress</option>
+                    <option th:value="COMPLETED"> Completed</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group mb-2">
+                <textarea type="text" th:field="*{description}" placeholder="Enter Project Description"></textarea>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mb-2">Create Project</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
