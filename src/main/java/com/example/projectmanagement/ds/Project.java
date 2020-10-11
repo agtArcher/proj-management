@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "projects")
 public class Project {
     @Id
     @GeneratedValue
