@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: head(~{::title})">
+    <title>Projects</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<div class="container">
+    <h3>Projects Directory</h3>
+    <hr>
+
+    <a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">New project</a>
+    <div th:replace="projects/project-table :: project-table"></div>
+</div>
+
+</body>
+</html>

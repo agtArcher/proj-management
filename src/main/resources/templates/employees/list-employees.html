@@ -3,17 +3,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layouts :: head(~{::title})">
-    <title>Home page</title>
+    <title>Employees</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
 <div class="container">
-    <h4>Current projects</h4>
-    <div th:replace="projects/project-table :: project-table"></div>
-</div>
+    <h3>Employees Directory</h3>
+    <hr>
 
-<div class="container">
-    <h4>Current employees</h4>
+    <a th:href="@{/employees/new}" class="btn btn-primary btn-sm mb-3">New employee</a>
     <div th:replace="employees/employee-table :: employee-table"></div>
 </div>
 

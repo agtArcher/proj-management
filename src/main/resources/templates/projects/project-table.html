@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="project-table">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Project Name</th>
+            <th scope="col">Project Stage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.getName()}">project 1</td>
+            <td th:text="${project.getStage()}">Not Started</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
