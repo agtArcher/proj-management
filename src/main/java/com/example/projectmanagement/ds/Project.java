@@ -1,9 +1,7 @@
 package com.example.projectmanagement.ds;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -14,6 +12,10 @@ public class Project {
     private String stage; //NOTSTARTED, COMPLETED, INPROGRESS
 
     private String description;
+
+    @OneToMany(mappedBy = "theProject")
+    private List<Employee> employees;
+
 
     public Project(String name, String stage, String description) {
         super();

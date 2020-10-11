@@ -1,8 +1,6 @@
 package com.example.projectmanagement.ds;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
@@ -15,6 +13,11 @@ public class Employee {
 
     private String lastName;
     private String email;
+
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project theProject;
 
     public Employee() {
     }
