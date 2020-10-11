@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>New project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div>
+    <h4>Current projects</h4>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Project Name</th>
+            <th scope="col">Project Stage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.getName()}">project 1</td>
+            <td th:text="${project.getStage()}">Not Started</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h4>Current employees</h4>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.getFirstName()}">Tom</td>
+            <td th:text="${employee.getLastName()}">Soyer</td>
+            <td th:text="${employee.getEmail()}">tom2@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
