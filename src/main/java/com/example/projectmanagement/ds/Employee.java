@@ -7,7 +7,9 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    //Auto - инкрементом занимается hibernate, Identity - инкрементом занимается сама бд
+    //такое решение помогает избежать проблем при добавлении начальных данных через sql файл
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
 
     private String firstName;
