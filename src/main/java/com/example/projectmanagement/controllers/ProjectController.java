@@ -1,14 +1,16 @@
 package com.example.projectmanagement.controllers;
 
+import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.dao.ProjectDao;
+import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.ds.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/projects")
@@ -16,6 +18,9 @@ public class ProjectController {
 
     @Autowired
     private ProjectDao projectDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @GetMapping("/")
     public String displayProjectList(Model model) {
@@ -25,15 +30,20 @@ public class ProjectController {
     }
 
     @GetMapping("/new")
-    public String displayProjectForm(@ModelAttribute("project") Project project) {
+    public String displayProjectForm(Model model) {
+        model.addAttribute("project", new Project());
+        model.addAttribute("allEmployees", employeeDao.findAll());
         return "projects/new-project";
     }
 
     @PostMapping("/save")
-    public String saveProject(@ModelAttribute("project") Project project) {
+    public String saveProject(@ModelAttribute("project") Project project, @RequestParam List<Long> employees) {
         projectDao.save(project);
 
-        return "redirect:/";
+        Iterable<Employee> chosenEmployees = employeeDao.findAllById(employees);
+        chosenEmployees.forEach(c -> c.setProject(project));
+        employeeDao.saveAll(chosenEmployees);
+        return "redirect:/projects/";
     }
 
 

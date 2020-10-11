@@ -33,7 +33,7 @@ public class EmployeeController {
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         employeeDao.save(employee);
 
-        return "redirect:/";
+        return "redirect:/employees/";
     }
 
 }
