@@ -9,7 +9,10 @@ public class Employee {
     @Id
     //Auto - инкрементом занимается hibernate, Identity - инкрементом занимается сама бд
     //такое решение помогает избежать проблем при добавлении начальных данных через sql файл
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Sequence - инкрементирует бд, а hibernate просто берет сгенерированный id.
+    //sequence позволяет использовать batch запросы, в отличии от identity
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_generator")
+    @SequenceGenerator(name = "employee_generator", sequenceName = "employee_seq", allocationSize = 1)
     private long employeeId;
 
     private String firstName;

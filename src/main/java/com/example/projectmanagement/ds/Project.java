@@ -7,7 +7,8 @@ import java.util.List;
 @Entity
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_generator")
+    @SequenceGenerator(name = "project_generator", sequenceName = "project_seq", allocationSize = 1)
     private long projectId;
     private String name;
     private String stage; //NOTSTARTED, COMPLETED, INPROGRESS
