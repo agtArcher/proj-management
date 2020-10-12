@@ -20,7 +20,7 @@ public class HomeController {
     public String displayHome(Model model) {
         //querying the database for projects and employees and add result from query to model
         model.addAttribute("projects", projectDao.findAll());
-        model.addAttribute("employees", employeeDao.findAll());
+        model.addAttribute("employeeListProjectsCnt", employeeDao.employeeProjects());
 
         return "main/home";
     }

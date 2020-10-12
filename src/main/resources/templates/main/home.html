@@ -27,7 +27,22 @@
     <h4>Current employees</h4>
     <div class="row">
         <div class="col-md-6">
-            <div th:replace="employees/employee-table :: employee-table"></div>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Project Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employeeProjectCnt : ${employeeListProjectsCnt}">
+                    <td th:text="${employeeProjectCnt.getFirstName()}">Tom</td>
+                    <td th:text="${employeeProjectCnt.getLastName()}">Soyer</td>
+                    <td th:text="${employeeProjectCnt.getProjectCount()}">3</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
