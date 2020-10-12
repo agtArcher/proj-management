@@ -7,19 +7,29 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<div class="container">
-    <h4>Current projects</h4>
-    <div th:replace="projects/project-table :: project-table"></div>
-</div>
 
+
+<div class="container">
+    <h3>Main Dashboard</h3>
+    <hr>
+    <h4>Current projects</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <div th:replace="projects/project-table :: project-table"></div>
+        </div>
+
+        <div class="col-md-4">
+            <canvas id="myPieChart" height="50" width="50"></canvas>
+        </div>
+    </div>
+</div>
 <div class="container">
     <h4>Current employees</h4>
-    <div th:replace="employees/employee-table :: employee-table"></div>
-</div>
-
-<div class="col-md-4">
-    <canvas id="myPieChart" height="50" width="50"></canvas>
-
+    <div class="row">
+        <div class="col-md-6">
+            <div th:replace="employees/employee-table :: employee-table"></div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" th:src="@{/js/myChart.js}"></script>
