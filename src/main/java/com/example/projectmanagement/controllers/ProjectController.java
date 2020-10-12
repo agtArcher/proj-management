@@ -2,15 +2,11 @@ package com.example.projectmanagement.controllers;
 
 import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.dao.ProjectDao;
-import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.ds.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/projects")
