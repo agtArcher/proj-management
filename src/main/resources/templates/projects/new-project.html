@@ -9,7 +9,7 @@
 <nav th:replace="layouts :: navbar"></nav>
 <div class="container">
     <h1>Add new project</h1>
-    <form action="/projects/save" method="POST" th:object="${project}">
+    <form th:action="@{/projects/save}" method="POST" th:object="${project}">
 
         <div class="form-group mb-2">
             <input type="text" th:field="*{name}" placeholder="Project Name">

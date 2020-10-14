@@ -18,7 +18,7 @@ public class UserAccount {
     private String password;
     private String role;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     public String getUserName() {
         return userName;
