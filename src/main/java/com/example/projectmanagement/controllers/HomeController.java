@@ -3,6 +3,8 @@ package com.example.projectmanagement.controllers;
 import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.dao.ProjectDao;
 import com.example.projectmanagement.dto.ChartData;
+import com.example.projectmanagement.services.EmployeeService;
+import com.example.projectmanagement.services.ProjectService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,10 @@ public class HomeController {
     private String ver;
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
 
     @Autowired
-    private ProjectDao projectDao;
+    private ProjectService projectService;
 
     @GetMapping({"/", "/home"})
     public String displayHome(Model model) throws JsonProcessingException {
@@ -32,8 +34,8 @@ public class HomeController {
         model.addAttribute("versionNumber", ver);
 
         //querying the database for projects and employees and add result from query to model
-        model.addAttribute("projects", projectDao.findAll());
-        Iterable<ChartData> projectData = projectDao.getProjectStatus();
+        model.addAttribute("projects", projectService.findAll());
+        Iterable<ChartData> projectData = projectService.getProjectStatus();
         //Map<String, Object> map = new HashMap<>();
 
         //convert projectData into json structure for use in javascript
@@ -44,7 +46,7 @@ public class HomeController {
 
         model.addAttribute("projectStatusCnt", jsonString);
 
-        model.addAttribute("employeeListProjectsCnt", employeeDao.employeeProjects());
+        model.addAttribute("employeeListProjectsCnt", employeeService.employeeProjects());
 
         return "main/home";
     }

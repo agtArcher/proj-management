@@ -2,6 +2,7 @@ package com.example.projectmanagement.controllers;
 
 import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.ds.Employee;
+import com.example.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
 
     @GetMapping("/new")
     public String displayEmployeeForm(@ModelAttribute("employee") Employee employee) {
@@ -24,14 +25,14 @@ public class EmployeeController {
 
     @GetMapping("/")
     public String displayEmployeesList(Model model) {
-        model.addAttribute("employees", employeeDao.findAll());
+        model.addAttribute("employees", employeeService.findAll());
 
         return "employees/list-employees";
     }
 
     @PostMapping("/save")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        employeeDao.save(employee);
+        employeeService.save(employee);
 
         return "redirect:/employees/";
     }
