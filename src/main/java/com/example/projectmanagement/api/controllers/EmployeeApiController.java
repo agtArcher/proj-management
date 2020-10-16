@@ -33,7 +33,7 @@ public class EmployeeApiController {
 
     @PutMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Employee update(@RequestBody Employee employee, @PathVariable long id) {
+    public Employee update(@RequestBody Employee employee) {
 
         return employeeDao.save(employee);
     }
