@@ -86,4 +86,8 @@ public class Employee {
     public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
+
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
+    }
 }

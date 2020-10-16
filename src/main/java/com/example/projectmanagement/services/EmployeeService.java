@@ -22,4 +22,12 @@ public class EmployeeService {
     public Iterable<EmployeeProject> employeeProjects() {
         return employeeDao.employeeProjects();
     }
+
+    public Employee findEmployeeById(long id) {
+        return employeeDao.findById(id).orElse(new Employee());
+    }
+
+    public void deleteById(long id) {
+        employeeDao.deleteById(id);
+    }
 }

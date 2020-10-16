@@ -14,6 +14,10 @@
             <input type="text" th:field="*{firstName}" placeholder="First Name">
         </div>
 
+        <!-- this will be used to bind to the employee that was clicking on; (used for updates) -->
+        <input type="hidden" th:field ="${employee.employeeId}" />
+
+
         <div class="form-group mb-2">
             <input type="text" th:field="*{lastName}" placeholder="Last Name">
         </div>

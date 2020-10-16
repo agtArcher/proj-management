@@ -6,10 +6,7 @@ import com.example.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/employees")
@@ -31,10 +28,25 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+    public String saveEmployee(Employee employee) {
         employeeService.save(employee);
 
         return "redirect:/employees/";
     }
 
+    //problem with inserting new record instead updating it resolved adding setter for id in employee entity
+    @GetMapping("/update")
+    public String displayUpdateEmployeeForm(@RequestParam("id") long id, Model model) {
+        Employee employee = employeeService.findEmployeeById(id);
+        model.addAttribute("employee", employee);
+
+        return "employees/new-employee";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("id") long id) {
+        employeeService.deleteById(id);
+
+        return "redirect:/employees/";
+    }
 }

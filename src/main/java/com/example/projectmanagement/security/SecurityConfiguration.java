@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/projects/new").hasRole("ADMIN")
                 .mvcMatchers("/projects/save").hasRole("ADMIN")
                 .mvcMatchers("/employees/new").hasRole("ADMIN")
-                .mvcMatchers("/employees/save").hasRole("ADMIN")
+//                .mvcMatchers("/employees/save").hasRole("ADMIN")
                 .mvcMatchers("/", "/**").permitAll()
             .and()
                 .formLogin();
