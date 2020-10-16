@@ -42,5 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin();
 
+        //csrf disable api methods except get without csrf token in header
+        //so for testing we have to disable csrf or add csrf token in header
+        http.csrf().disable();
     }
 }

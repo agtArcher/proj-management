@@ -1,5 +1,7 @@
 package com.example.projectmanagement.ds;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Employee {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
+    @JsonIgnore //for avoid stack overflow error. Need to place in both relational entities.
     private List<Project> projects;
 
     public Employee() {
