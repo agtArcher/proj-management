@@ -2,6 +2,7 @@ package com.example.projectmanagement.controllers;
 
 import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.dao.ProjectDao;
+import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.ds.Project;
 import com.example.projectmanagement.services.EmployeeService;
 import com.example.projectmanagement.services.ProjectService;
@@ -37,6 +38,22 @@ public class ProjectController {
     @PostMapping("/save")
     public String saveProject(@ModelAttribute("project") Project project) {
         projectService.save(project);
+        return "redirect:/projects/";
+    }
+
+    @GetMapping("/update")
+    public String displayProjectUpdateForm(@RequestParam("id") long id, Model model) {
+        Project project = projectService.findProjectById(id);
+        model.addAttribute("project", project);
+        model.addAttribute("allEmployees", employeeService.findAll());
+
+        return "projects/new-project";
+    }
+
+    @GetMapping("/delete")
+    public String deleteProject(@RequestParam("id") long id) {
+        projectService.deleteById(id);
+
         return "redirect:/projects/";
     }
 }

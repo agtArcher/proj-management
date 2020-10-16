@@ -34,6 +34,10 @@ public class Project {
     public Project() {
     }
 
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
     public long getProjectId() {
         return projectId;
     }

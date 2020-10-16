@@ -27,4 +27,12 @@ public class ProjectService {
     public Iterable<ChartData> getProjectStatus() {
         return projectDao.getProjectStatus();
     }
+
+    public Project findProjectById(long id) {
+        return projectDao.findById(id).orElse(new Project());
+    }
+
+    public void deleteById(long id) {
+        projectDao.deleteById(id);
+    }
 }
