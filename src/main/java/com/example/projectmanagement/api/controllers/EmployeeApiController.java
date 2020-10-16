@@ -4,6 +4,8 @@ import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.ds.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,5 +65,13 @@ public class EmployeeApiController {
             employeeDao.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
         }
+    }
+
+    @GetMapping(params = {"page", "size"})
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Employee> findPaginatedEmployees(@RequestParam("page") int page,
+                                                     @RequestParam("size") int size) {
+        Pageable pageAndSize = PageRequest.of(page, size);
+        return employeeDao.findAll(pageAndSize);
     }
 }

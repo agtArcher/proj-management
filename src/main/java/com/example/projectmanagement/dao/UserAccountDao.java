@@ -1,7 +1,7 @@
 package com.example.projectmanagement.dao;
 
 import com.example.projectmanagement.ds.UserAccount;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserAccountDao extends CrudRepository<UserAccount, Long> {
+public interface UserAccountDao extends PagingAndSortingRepository<UserAccount, Long> {
 }
