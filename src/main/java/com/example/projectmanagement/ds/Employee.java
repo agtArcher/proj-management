@@ -1,5 +1,6 @@
 package com.example.projectmanagement.ds;
 
+import com.example.projectmanagement.validators.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Employee {
 
     @NotNull
     @Email
-    @Column(unique = true)
+    @UniqueValue
     private String email;
 
 
