@@ -27,11 +27,8 @@ public class Project {
                 inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @JsonIgnore
     private List<Employee> employees;
-
-    @NotBlank(message = "Start date cannot be empty")
     private Date startDate;
 
-    @NotBlank(message = "End date cannot be empty")
     private Date endDate;
 
 

@@ -72,7 +72,7 @@ public class ProjectController {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonTimeLineString = objectMapper.writeValueAsString(timeChartData);
 
-        model.addAttribute("timelinesChart", jsonTimeLineString);
+        model.addAttribute("projectTimeList", jsonTimeLineString);
 
         System.out.println("-------- project timelines --------");
         System.out.println(jsonTimeLineString);

@@ -20,6 +20,6 @@ public interface ProjectDao extends PagingAndSortingRepository<Project, Long> {
             "GROUP BY stage")
     Iterable<ChartData> getProjectStatus();
 
-    @Query(nativeQuery = true, value = "SELECT name as projectName, start_date as startDate, end_date as endDate FROM project")
+    @Query(nativeQuery = true, value = "SELECT name as projectName, start_date as startDate, end_date as endDate FROM project where start_date is not null")
     Iterable<TimeChartData> getTimeData();
 }
