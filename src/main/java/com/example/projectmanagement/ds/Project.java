@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,12 @@ public class Project {
                 inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @JsonIgnore
     private List<Employee> employees;
+
+    @NotBlank(message = "Start date cannot be empty")
+    private Date startDate;
+
+    @NotBlank(message = "End date cannot be empty")
+    private Date endDate;
 
 
     public Project(String name, String stage, String description) {
@@ -83,5 +90,21 @@ public class Project {
             employees = new ArrayList<>();
         }
         employees.add(employee);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

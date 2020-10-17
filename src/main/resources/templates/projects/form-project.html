@@ -41,6 +41,23 @@
                 </option>
             </select>
         </div>
+
+        Project Start Date:
+        <div class="form-group row">
+            <input id="dp3" type="text" class="md-4 col-2 col-xs-4" value="Start date" th:field="*{startDate}" />
+            <span style="color: red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+        </div>
+
+        Project End Date:
+        <div class="form-group row">
+            <input id="dp4" type="text" class="md-4 col-2 col-xs-4" value="End date" th:field="*{endDate}" />
+            <span style="color: red" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+        </div>
+
+        <script type="text/javascript">
+            $('#dp3').datepicker();
+            $('#dp4').datepicker();
+        </script>
         <button type="submit" class="btn btn-info col-2">Enter Project</button>
     </form>
 </div>

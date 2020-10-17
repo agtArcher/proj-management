@@ -60,4 +60,11 @@ public class ProjectController {
 
         return "redirect:/projects/";
     }
+
+    @GetMapping("/timelines")
+    public String timelinesList(Model model) {
+        model.addAttribute("projects", projectService.projectDates());
+
+        return "projects/timelines";
+    }
 }
