@@ -1,8 +1,11 @@
 package com.example.projectmanagement.controllers;
 
 import com.example.projectmanagement.ds.Project;
+import com.example.projectmanagement.dto.TimeChartData;
 import com.example.projectmanagement.services.EmployeeService;
 import com.example.projectmanagement.services.ProjectService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,9 +65,19 @@ public class ProjectController {
     }
 
     @GetMapping("/timelines")
-    public String timelinesList(Model model) {
-        model.addAttribute("projects", projectService.projectDates());
+    public String displayProjectTimelines(Model model) throws JsonProcessingException {
+        Iterable<TimeChartData> timeChartData = projectService.getTimeData();
 
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonTimeLineString = objectMapper.writeValueAsString(timeChartData);
+
+        model.addAttribute("timelinesChart", jsonTimeLineString);
+
+        System.out.println("-------- project timelines --------");
+        System.out.println(jsonTimeLineString);
+
+        model.addAttribute("projectTimeDatas", timeChartData);
         return "projects/timelines";
     }
 }

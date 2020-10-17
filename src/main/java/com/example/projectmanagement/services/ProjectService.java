@@ -1,10 +1,9 @@
 package com.example.projectmanagement.services;
 
-import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.dao.ProjectDao;
 import com.example.projectmanagement.ds.Project;
 import com.example.projectmanagement.dto.ChartData;
-import com.example.projectmanagement.dto.ProjectDates;
+import com.example.projectmanagement.dto.TimeChartData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,7 @@ public class ProjectService {
         projectDao.deleteById(id);
     }
 
-    public Iterable<ProjectDates> projectDates() {
-        return projectDao.projectDates();
+    public Iterable<TimeChartData> getTimeData() {
+        return projectDao.getTimeData();
     }
 }

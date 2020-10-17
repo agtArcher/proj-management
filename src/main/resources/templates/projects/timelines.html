@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: head(~{::title})">
+    <title>Project Timelines</title>
+</head>
+<body>
+
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Project Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="projectTimeData : ${projectTimeDatas}">
+            <td th:text="${projectTimeData.getProjectName()}">project 1</td>
+            <td th:text="${projectTimeData.getStartDate()}"></td>
+            <td th:text="${projectTimeData.getEndDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
