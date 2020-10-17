@@ -77,7 +77,6 @@ public class ProjectController {
         System.out.println("-------- project timelines --------");
         System.out.println(jsonTimeLineString);
 
-        model.addAttribute("projectTimeDatas", timeChartData);
         return "projects/timelines";
     }
 }
