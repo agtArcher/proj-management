@@ -3,6 +3,8 @@ package com.example.projectmanagement.ds;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,9 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_generator")
     @SequenceGenerator(name = "project_generator", sequenceName = "project_seq", allocationSize = 1)
     private long projectId;
+    @NotBlank(message = "Project name cannot be empty")
     private String name;
+    @NotBlank(message = "Must choose correct stage")
     private String stage; //NOTSTARTED, COMPLETED, INPROGRESS
 
     private String description;

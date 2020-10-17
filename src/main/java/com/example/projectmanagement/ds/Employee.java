@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -21,15 +22,15 @@ public class Employee {
     @SequenceGenerator(name = "employee_generator", sequenceName = "employee_seq", allocationSize = 1)
     private long employeeId;
 
-    @NotNull
-    @Size(min = 2, max = 50)
+    @NotBlank(message = "*First name cannot be empty")
+    @Size(min = 2, max = 50, message = "*size must be between 2 and 50 symbols")
     private String firstName;
 
-    @NotNull
-    @Size(min = 1, max = 50)
+    @NotBlank(message = "*Last name cannot be empty")
+    @Size(min = 1, max = 50, message = "*size must be between 1 and 50 symbols")
     private String lastName;
 
-    @NotNull
+    @NotBlank(message = "*Must be a valid email")
     @Email
     @UniqueValue
     private String email;

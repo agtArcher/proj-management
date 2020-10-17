@@ -12,7 +12,34 @@
     <hr>
 
     <a th:href="@{/employees/new}" class="btn btn-primary btn-sm mb-3">New employee</a>
-    <div th:replace="employees/employee-table :: employee-table"></div>
+    <div th:fragment="employee-table">
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.getFirstName()}">Tom</td>
+                <td th:text="${employee.getLastName()}">Soyer</td>
+                <td th:text="${employee.getEmail()}">tom2@example.com</td>
+                <td>
+                    <a th:href="@{/employees/update(id=${employee.getEmployeeId()})}"
+                       class="btn btn-info btn-sm">Update</a>
+                    <a th:href="@{/employees/delete(id=${employee.getEmployeeId()})}"
+                       class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

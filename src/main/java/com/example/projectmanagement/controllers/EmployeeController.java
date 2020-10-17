@@ -1,12 +1,14 @@
 package com.example.projectmanagement.controllers;
 
-import com.example.projectmanagement.dao.EmployeeDao;
 import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/employees")
@@ -17,7 +19,7 @@ public class EmployeeController {
 
     @GetMapping("/new")
     public String displayEmployeeForm(@ModelAttribute("employee") Employee employee) {
-        return "employees/new-employee";
+        return "employees/form-employee";
     }
 
     @GetMapping("/")
@@ -28,7 +30,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String saveEmployee(Employee employee) {
+    public String saveEmployee(@Valid Employee employee, Errors errors) {
+        if (errors.hasErrors()) {
+            return "employees/form-employee";
+        }
+
         employeeService.save(employee);
 
         return "redirect:/employees/";
@@ -40,7 +46,7 @@ public class EmployeeController {
         Employee employee = employeeService.findEmployeeById(id);
         model.addAttribute("employee", employee);
 
-        return "employees/new-employee";
+        return "employees/form-employee";
     }
 
     @GetMapping("/delete")

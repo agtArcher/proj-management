@@ -1,15 +1,15 @@
 package com.example.projectmanagement.controllers;
 
-import com.example.projectmanagement.dao.EmployeeDao;
-import com.example.projectmanagement.dao.ProjectDao;
-import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.ds.Project;
 import com.example.projectmanagement.services.EmployeeService;
 import com.example.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/projects")
@@ -32,11 +32,15 @@ public class ProjectController {
     public String displayProjectForm(Model model) {
         model.addAttribute("project", new Project());
         model.addAttribute("allEmployees", employeeService.findAll());
-        return "projects/new-project";
+        return "projects/form-project";
     }
 
     @PostMapping("/save")
-    public String saveProject(@ModelAttribute("project") Project project) {
+    public String saveProject(@Valid Project project, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("allEmployees", employeeService.findAll());
+            return "projects/form-project";
+        }
         projectService.save(project);
         return "redirect:/projects/";
     }
@@ -47,7 +51,7 @@ public class ProjectController {
         model.addAttribute("project", project);
         model.addAttribute("allEmployees", employeeService.findAll());
 
-        return "projects/new-project";
+        return "projects/form-project";
     }
 
     @GetMapping("/delete")
