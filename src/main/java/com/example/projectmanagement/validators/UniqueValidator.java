@@ -1,7 +1,7 @@
 package com.example.projectmanagement.validators;
 
 import com.example.projectmanagement.dao.EmployeeDao;
-import com.example.projectmanagement.ds.Employee;
+import com.example.projectmanagement.validators.annotations.UniqueValue;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

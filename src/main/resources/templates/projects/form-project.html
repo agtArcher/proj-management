@@ -12,28 +12,32 @@
 
     <form th:action="@{/projects/save}" method="POST" th:object="${project}">
 
-        <div class="form-group row">
-            <input type="text" th:field="*{name}" placeholder="Project Name">
-            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <div class="form-group">
+            <label for="name">Project Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Project Name"
+                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:errors="*{name}"></div>
         </div>
 
         <input type="hidden" th:field="*{projectId}" />
 
-        <div class="form-group row">
-            <select th:field="*{stage}" class="form-control mb-2">
+        <div class="form-group">
+            <label for="stage">Project Stage</label>
+            <select id="stage" th:field="*{stage}" class="form-control">
                 <option th:value="NOTSTARTED"> Not Started</option>
                 <option th:value="INPROGRESS"> In progress</option>
                 <option th:value="COMPLETED"> Completed</option>
             </select>
         </div>
 
-
-        <div class="form-group row">
-            <textarea type="text" th:field="*{description}" placeholder="Enter Project Description"></textarea>
+        <div class="form-group">
+            <label for="description">Project Description</label>
+            <textarea id="description" class="form-control" type="text" th:field="*{description}" placeholder="Enter Project Description"></textarea>
         </div>
 
-        <div class="form-group row">
-            <select th:field="*{employees}" multiple="multiple">
+        <div class="form-group">
+            <label for="employees">Employees to be involved</label>
+            <select class="form-control" id="employees" th:field="*{employees}" multiple="multiple">
                 <option th:each="employee : ${allEmployees}"
                         th:value="${employee.getEmployeeId()}"
                         th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">
@@ -42,16 +46,18 @@
             </select>
         </div>
 
-        Project Start Date:
-        <div class="form-group row">
-            <input id="dp3" type="text" class="md-4 col-2 col-xs-4" value="Start date" th:field="*{startDate}" />
-            <span style="color: red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+        <div class="form-group">
+            <label for="dp3">Project Start Date</label>
+            <input type="text" class="form-control md-4 col-2 col-xs-4" id="dp3" th:field="*{startDate}"
+                   th:classappend="${#fields.hasErrors('startDate')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:errors="*{startDate}"></div>
         </div>
 
-        Project End Date:
-        <div class="form-group row">
-            <input id="dp4" type="text" class="md-4 col-2 col-xs-4" value="End date" th:field="*{endDate}" />
-            <span style="color: red" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+        <div class="form-group">
+            <label for="dp4">Project End Date</label>
+            <input type="text" class="form-control md-4 col-2 col-xs-4" id="dp4" th:field="*{endDate}"
+                   th:classappend="${#fields.hasErrors('endDate')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:errors="*{endDate}"></div>
         </div>
 
         <script type="text/javascript">

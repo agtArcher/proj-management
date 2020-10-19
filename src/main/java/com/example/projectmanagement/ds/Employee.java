@@ -1,12 +1,11 @@
 package com.example.projectmanagement.ds;
 
-import com.example.projectmanagement.validators.UniqueValue;
+import com.example.projectmanagement.validators.annotations.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 

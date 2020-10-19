@@ -1,5 +1,6 @@
 package com.example.projectmanagement.ds;
 
+import com.example.projectmanagement.validators.annotations.NotBlankDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -27,8 +28,9 @@ public class Project {
                 inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @JsonIgnore
     private List<Employee> employees;
+    @NotBlankDate(message = "Start Date cannot be empty")
     private Date startDate;
-
+    @NotBlankDate(message = "End Date cannot be empty")
     private Date endDate;
 
 
