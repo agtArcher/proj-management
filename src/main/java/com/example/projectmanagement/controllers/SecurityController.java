@@ -30,6 +30,6 @@ public class SecurityController {
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
         userAccountService.save(user);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

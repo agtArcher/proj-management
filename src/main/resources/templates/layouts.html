@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head(title)">
     <title th:replace="${title}">Layout Title</title>
@@ -28,10 +29,23 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link active" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-link" th:href="@{/projects/}">Projects</a>
-            <a class="nav-link" th:href="@{/employees/}">Employees</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/projects/}">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/employees/}">Employees</a>
+            </li>
+        </ul>
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}">Log Out</a>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}">Log In</a>
+            <a th:href="@{/register}">Register</a>
         </div>
     </div>
 </nav>

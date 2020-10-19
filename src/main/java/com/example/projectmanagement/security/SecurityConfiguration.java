@@ -40,7 +40,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .mvcMatchers("/employees/save").hasRole("ADMIN")
                 .mvcMatchers("/", "/**").permitAll()
             .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login-error")
+                .permitAll()
+            .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll();
 
         //csrf disable api methods except get without csrf token in header
         //so for testing we have to disable csrf or add csrf token in header
