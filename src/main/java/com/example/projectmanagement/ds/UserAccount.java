@@ -1,6 +1,7 @@
 package com.example.projectmanagement.ds;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user_accounts")
@@ -12,9 +13,11 @@ public class UserAccount {
     private long userId;
 
     @Column(name = "username")
+    @NotBlank
     private String userName;
-
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
     private String role;
 
