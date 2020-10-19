@@ -5,6 +5,7 @@ import com.example.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String saveEmployee(@Valid Employee employee, Errors errors) {
-        if (errors.hasErrors()) {
+    public String saveEmployee(@Valid Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "employees/form-employee";
         }
 

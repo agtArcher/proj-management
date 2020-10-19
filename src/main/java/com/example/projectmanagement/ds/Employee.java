@@ -23,11 +23,11 @@ public class Employee {
     private long employeeId;
 
     @NotBlank(message = "*First name cannot be empty")
-    @Size(min = 2, max = 50, message = "*size must be between 2 and 50 symbols")
+    @Size(min = 2, max = 50, message = "*Size must be between 2 and 50 symbols")
     private String firstName;
 
     @NotBlank(message = "*Last name cannot be empty")
-    @Size(min = 1, max = 50, message = "*size must be between 1 and 50 symbols")
+    @Size(min = 1, max = 50, message = "*Size must be between 1 and 50 symbols")
     private String lastName;
 
     @NotBlank(message = "*Must be a valid email")
