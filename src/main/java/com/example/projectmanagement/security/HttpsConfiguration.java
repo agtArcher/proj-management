@@ -11,12 +11,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class HttpsConfiguration {
+
     @Value("${server.port.http}")
     private int httpPort;
 
     @Value("${server.port}")
     private int httpsPort;
-
+    //these two methods + properties in .properties file provide https connection
     @Bean
     public TomcatServletWebServerFactory httpsRedirectConfig() {
         return new TomcatServletWebServerFactory () {

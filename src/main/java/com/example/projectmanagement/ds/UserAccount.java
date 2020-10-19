@@ -1,7 +1,12 @@
 package com.example.projectmanagement.ds;
 
+import com.example.projectmanagement.validators.annotations.UniqueUserEmail;
+import com.example.projectmanagement.validators.annotations.UniqueUsername;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_accounts")
@@ -13,11 +18,18 @@ public class UserAccount {
     private long userId;
 
     @Column(name = "username")
-    @NotBlank
+    @NotBlank(message = "*Username cannot be empty")
+    @Size(min = 4, max = 50, message = "*Size must be between 4 and 50 symbols")
+    @UniqueUsername(message = "*Username must be unique")
     private String userName;
-    @NotBlank
+
+    @NotBlank(message = "*Email cannot be empty")
+    @Email(message = "*Email must be valid")
+    @UniqueUserEmail(message = "*Email must be unique")
     private String email;
-    @NotBlank
+
+    @NotBlank(message = "Password cannot be empty")
+    @Size(min = 6, message = "Password must be more than 5 symbols")
     private String password;
     private String role;
 
