@@ -1,42 +1,26 @@
 package com.example.projectmanagement.controllers;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
+@ControllerAdvice
+public class AppErrorController {
 
-@Controller
-public class AppErrorController implements ErrorController {
+    private Logger logger = LoggerFactory.getLogger(AppErrorController.class);
 
-    @GetMapping("/error")
-    public String handleError(HttpServletRequest request) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleException(final Throwable throwable, Model model) {
+        logger.error("Exception during execution of application", throwable);
+        String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
+        model.addAttribute("errorMessage", errorMessage);
 
-        if (status != null) {
-            int statusCode = Integer.parseInt(status.toString());
-
-            if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "errorpages/error-404";
-            }
-            else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "errorpages/error-500";
-            }
-            else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                return "errorpages/error-403";
-            }
-        }
-
-        return "errorpages/error";
-    }
-
-
-
-    @Override
-    public String getErrorPath() {
-        return "/error";
+        return "error";
     }
 
 }

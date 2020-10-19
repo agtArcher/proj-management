@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: head(~{::title})">
+    <title>Error page</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 py-4"
+             th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+            <h2>Error Page</h2>
+
+            <div class="alert alert-danger" role="alert">
+                <h3 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"></h3>
+                <p th:utext="${errorMessage}"></p>
+                <a href="#" th:href="@{/home}">Back to Home Page</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

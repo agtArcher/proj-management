@@ -33,16 +33,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-//                .mvcMatchers("/projects/new").hasRole("ADMIN")
-//                .mvcMatchers("/projects/save").hasRole("ADMIN")
-//                .mvcMatchers("/employees/new").hasRole("ADMIN")
-//                .mvcMatchers("/employees/save").hasRole("ADMIN")
-                .mvcMatchers("/", "/**").permitAll()
+        http
+                .authorizeRequests()
+                .mvcMatchers("/", "/home", "/register").permitAll()
+                .mvcMatchers("/projects/new").hasRole("ADMIN")
+                .mvcMatchers("/projects/save").hasRole("ADMIN")
+                .mvcMatchers("/employees/new").hasRole("ADMIN")
+                .mvcMatchers("/employees/save").hasRole("ADMIN")
+                .anyRequest().authenticated()
             .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login-error")
+                .defaultSuccessUrl("/", true)
                 .permitAll()
             .and()
                 .logout()
