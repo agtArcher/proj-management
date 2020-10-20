@@ -15,7 +15,7 @@
             <h3 class="form-signin-heading">Registration Form</h3>
 
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('${registerData}')}">
-                <p th:errors="${registerData}">Some troubles</p>
+                <span th:errors="${registerData}">Some troubles</span>
             </div>
 
             <div class="form-group">

@@ -2,6 +2,7 @@ package com.example.projectmanagement.ds;
 
 import com.example.projectmanagement.validators.annotations.UniqueUserEmail;
 import com.example.projectmanagement.validators.annotations.UniqueUsername;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,7 +31,9 @@ public class UserAccount {
 
     @NotBlank(message = "Password cannot be empty")
     @Size(min = 6, message = "Password must be more than 5 symbols")
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private String role;
 
     public UserAccount(String userName, String email, String password) {

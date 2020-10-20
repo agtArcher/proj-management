@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .mvcMatchers("/", "/home", "/register/**").permitAll()
+                .mvcMatchers("/api-useraccounts").hasRole("ADMIN")
 //                .mvcMatchers("/projects/new").hasRole("ADMIN")
 //                .mvcMatchers("/projects/save").hasRole("ADMIN")
 //                .mvcMatchers("/employees/new").hasRole("ADMIN")

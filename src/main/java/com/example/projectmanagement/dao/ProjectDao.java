@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "apiprojects", path = "apiprojects")
+@RepositoryRestResource(collectionResourceRel = "api-projects", path = "api-projects")
 public interface ProjectDao extends PagingAndSortingRepository<Project, Long> {
 
     @Override
