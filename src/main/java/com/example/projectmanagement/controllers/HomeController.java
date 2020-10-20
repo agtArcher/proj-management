@@ -1,7 +1,5 @@
 package com.example.projectmanagement.controllers;
 
-import com.example.projectmanagement.dao.EmployeeDao;
-import com.example.projectmanagement.dao.ProjectDao;
 import com.example.projectmanagement.dto.ChartData;
 import com.example.projectmanagement.services.EmployeeService;
 import com.example.projectmanagement.services.ProjectService;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -36,7 +32,6 @@ public class HomeController {
         //querying the database for projects and employees and add result from query to model
         model.addAttribute("projects", projectService.findAll());
         Iterable<ChartData> projectData = projectService.getProjectStatus();
-        //Map<String, Object> map = new HashMap<>();
 
         //convert projectData into json structure for use in javascript
 
