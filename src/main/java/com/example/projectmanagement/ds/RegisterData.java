@@ -1,27 +1,20 @@
 package com.example.projectmanagement.ds;
 
+import com.example.projectmanagement.validators.annotations.PasswordMatches;
 import com.example.projectmanagement.validators.annotations.UniqueUserEmail;
 import com.example.projectmanagement.validators.annotations.UniqueUsername;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "user_accounts")
-public class UserAccount {
+@PasswordMatches
+public class RegisterData {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_accounts_generator")
-    @SequenceGenerator(name = "user_accounts_generator", sequenceName = "user_accounts_seq", allocationSize = 1)
-    private long userId;
-
-    @Column(name = "username")
     @NotBlank(message = "*Username cannot be empty")
     @Size(min = 4, max = 50, message = "*Size must be between 4 and 50 symbols")
     @UniqueUsername(message = "*Username must be unique")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "*Email cannot be empty")
     @Email(message = "*Email must be valid")
@@ -31,26 +24,16 @@ public class UserAccount {
     @NotBlank(message = "Password cannot be empty")
     @Size(min = 6, message = "Password must be more than 5 symbols")
     private String password;
-    private String role;
 
-    public UserAccount(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        role = "ROLE_USER";
+    private String passConfirm;
+
+
+    public String getUsername() {
+        return username;
     }
 
-    public UserAccount() {
-    }
-
-    private boolean enabled = true;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -69,25 +52,12 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getPassConfirm() {
+        return passConfirm;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPassConfirm(String passConfirm) {
+        this.passConfirm = passConfirm;
     }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
 
 }
