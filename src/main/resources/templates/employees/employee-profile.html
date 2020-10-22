@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: head(~{::title})">
+    <title>Employee profile</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container"><br>
+    <p>First Name: <span th:text="${employee.getFirstName()}">John</span></p>
+    <p>Last Name: <span th:text="${employee.getLastName()}"></span></p>
+    <p>Email: <span th:text="${employee.getEmail()}"></span></p>
+
+    <hr>
+    <p>Involved in projects:</p>
+</div>
+<div class="container">
+
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Project Name</th>
+                <th scope="col">Project Stage</th>
+                <th scope="col">Project Description</th>
+                <th scope="col">Start Data</th>
+                <th scope="col">End Data</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${employee.getProjects()}">
+                <td th:text="${project.getName()}">project 1</td>
+                <td th:text="${project.getStage()}">Not Started</td>
+                <td th:text="${project.getDescription()}">Test Description</td>
+                <td th:text="${project.getStartDate()}">01/01/1998</td>
+                <td th:text="${project.getEndDate()}">02/02/1999</td>
+                <td>
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" th:href="@{/projects/update(id=${project.getProjectId()})}">
+                            Update</a>
+                        <a class="dropdown-item text-danger" href="#" th:href="@{/employees/remove(id=${employee.getEmployeeId()}, projectId=${project.getProjectId()})}"
+                           onclick="if (!(confirm('Are you sure you want to remove this project from employee\'s project list?'))) return false">
+                            Remove from list</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">View Project Profile</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

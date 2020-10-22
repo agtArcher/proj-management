@@ -59,11 +59,26 @@ public class EmployeeController {
         model.addAttribute("allProjects", projectService.findAll());
         return "employees/form-employee";
     }
-
     @GetMapping("/delete")
     public String deleteEmployee(@RequestParam("id") long id) {
         employeeService.deleteById(id);
 
         return "redirect:/employees/";
+    }
+
+    @GetMapping("/{id}")
+    public String displayEmployeeProfile(@PathVariable("id") long id, Model model) {
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+
+        return "employees/employee-profile";
+    }
+
+    @GetMapping("/remove")
+    public String removeProjectFromEmployee(@RequestParam("id") long employeeId, @RequestParam("projectId") long projectId) {
+        Employee employee = employeeService.findEmployeeById(employeeId);
+        employee.getProjects().removeIf(c -> c.getProjectId() == projectId);
+        employeeService.save(employee);
+
+        return "redirect:/employees/" + employeeId;
     }
 }

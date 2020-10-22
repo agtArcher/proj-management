@@ -45,7 +45,7 @@
                                onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
                                 Delete</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">View Employee Profile</a>
+                            <a class="dropdown-item" href="#" th:href="@{${employee.getEmployeeId()}}">View Employee Profile</a>
                         </div>
                     </div>
                 </td>
