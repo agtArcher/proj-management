@@ -6,6 +6,8 @@ import com.example.projectmanagement.dto.EmployeeProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EmployeeService {
     @Autowired
@@ -29,5 +31,9 @@ public class EmployeeService {
 
     public void deleteById(long id) {
         employeeDao.deleteById(id);
+    }
+
+    public Optional<String> findEmployeesEmailById(long id) {
+        return employeeDao.findEmailByEmployeeId(id);
     }
 }

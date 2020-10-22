@@ -17,4 +17,7 @@ public interface EmployeeDao extends PagingAndSortingRepository<Employee, Long> 
     Iterable<EmployeeProject> employeeProjects();
 
     Optional<Employee> findByEmail(String email);
+
+    @Query(nativeQuery = true, value = "SELECT email FROM employee WHERE employee_id = ?")
+    Optional<String> findEmailByEmployeeId(long id);
 }

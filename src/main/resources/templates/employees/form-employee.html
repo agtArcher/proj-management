@@ -35,6 +35,17 @@
             <div class="invalid-feedback" th:errors="*{email}"></div>
         </div>
 
+        <div class="form-group">
+            <label for="projects">Involve to projects..</label>
+            <select class="form-control" id="projects" th:field="*{projects}" multiple="multiple">
+                <option th:each="project : ${allProjects}"
+                        th:value="${project.getProjectId()}"
+                        th:text="${project.getName()}">
+                    Test Project
+                </option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-info col-2">Enter Employee</button>
     </form>
 </div>

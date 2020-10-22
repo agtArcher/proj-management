@@ -2,24 +2,30 @@ package com.example.projectmanagement.controllers;
 
 import com.example.projectmanagement.ds.Employee;
 import com.example.projectmanagement.services.EmployeeService;
+import com.example.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
+    private ProjectService projectService;
+
+    @Autowired
     private EmployeeService employeeService;
 
     @GetMapping("/new")
-    public String displayEmployeeForm(@ModelAttribute("employee") Employee employee) {
+    public String displayEmployeeForm(Model model) {
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("allProjects", projectService.findAll());
         return "employees/form-employee";
     }
 
@@ -31,8 +37,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String saveEmployee(@Valid Employee employee, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String saveEmployee(@Valid Employee employee, BindingResult bindingResult, Model model) {
+        //findEmployeesEmailById search in db employee's email
+        //in case when record from db equals to record from employee, method ignore validation from @UniqueEmployeeEmail
+        Optional<String> employeeEmail = employeeService.findEmployeesEmailById(employee.getEmployeeId());
+        if (bindingResult.hasErrors() && (!employeeEmail.isPresent() || !employeeEmail.get().equals(employee.getEmail()))) {
+            model.addAttribute("allProjects", projectService.findAll());
             return "employees/form-employee";
         }
 
@@ -46,7 +56,7 @@ public class EmployeeController {
     public String displayUpdateEmployeeForm(@RequestParam("id") long id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
         model.addAttribute("employee", employee);
-
+        model.addAttribute("allProjects", projectService.findAll());
         return "employees/form-employee";
     }
 

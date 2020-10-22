@@ -1,7 +1,6 @@
 package com.example.projectmanagement.validators.annotations;
 
 import com.example.projectmanagement.validators.NotBlankDateValidator;
-import com.example.projectmanagement.validators.UniqueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

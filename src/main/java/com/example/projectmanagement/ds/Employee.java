@@ -1,6 +1,6 @@
 package com.example.projectmanagement.ds;
 
-import com.example.projectmanagement.validators.annotations.UniqueValue;
+import com.example.projectmanagement.validators.annotations.UniqueEmployeeEmail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -31,7 +31,7 @@ public class Employee {
 
     @NotBlank(message = "*Must be a valid email")
     @Email
-    @UniqueValue
+    @UniqueEmployeeEmail
     private String email;
 
 

@@ -1,14 +1,14 @@
 package com.example.projectmanagement.validators;
 
 import com.example.projectmanagement.dao.EmployeeDao;
-import com.example.projectmanagement.validators.annotations.UniqueValue;
+import com.example.projectmanagement.validators.annotations.UniqueEmployeeEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 
-public class UniqueValidator implements ConstraintValidator<UniqueValue, String> {
+public class UniqueEmployeeEmailValidator implements ConstraintValidator<UniqueEmployeeEmail, String> {
 
     @Autowired
     private EmployeeDao employeeDao;
